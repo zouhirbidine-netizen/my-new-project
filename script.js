@@ -50,12 +50,33 @@ if (formulaire) {
                 <td>${nom}</td>
                 <td>${ville}</td>
                 <td>${pays}</td>
-                <td>✏️ 🗑️</td>
+                <td>
+    <button class="btn-supprimer" onclick="supprimerSociete(this)">
+        🗑️
+    </button>
+</td>
             </tr>
         `;
 
         formulaire.reset();
 
     });
+
+}
+// =========================
+// SUPPRIMER UNE SOCIÉTÉ
+// =========================
+
+function supprimerSociete(bouton) {
+
+    const confirmation = confirm("Voulez-vous vraiment supprimer cette société ?");
+
+    if (confirmation) {
+
+        const ligne = bouton.parentElement.parentElement;
+
+        ligne.remove();
+
+    }
 
 }

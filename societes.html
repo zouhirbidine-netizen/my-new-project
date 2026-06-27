@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,71 +18,27 @@
         <h1>ComptaConnect</h1>
     </div>
 
-    <button class="btn-deconnexion">Déconnexion</button>
+    <button class="btn-deconnexion" onclick="window.location.href='index.html'">
+        Déconnexion
+    </button>
 
 </header>
 
 <main>
 
     <h2>🏢 Gestion des sociétés</h2>
+
     <form id="formSociete">
 
-    <input type="text" id="nom" placeholder="Nom de la société" required>
+        <input type="text" id="nom" placeholder="Nom de la société" required>
 
-    <input type="text" id="ville" placeholder="Ville" required>
+        <input type="text" id="ville" placeholder="Ville" required>
 
-    <input type="text" id="pays" placeholder="Pays" required>
+        <input type="text" id="pays" placeholder="Pays" required>
 
-    <button type="submit">Ajouter</button>
+        <button type="submit">Ajouter</button>
 
-</form>
-
-    <h2>🏢 Gestion des sociétés</h2>
-
-<form id="formSociete">
-
-    <input type="text" id="nom" placeholder="Nom de la société" required>
-
-    <input type="text" id="ville" placeholder="Ville" required>
-
-    <input type="text" id="pays" placeholder="Pays" required>
-
-    <button type="submit">Ajouter</button>
-
-</form>
-
-<table>
-
-    <thead>
-
-        <tr>
-            <th>Nom</th>
-            <th>Ville</th>
-            <th>Pays</th>
-            <th>Actions</th>
-        </tr>
-
-    </thead>
-
-    <tbody id="listeSocietes">
-
-        <tr>
-            <td>Total</td>
-            <td>Paris</td>
-            <td>France</td>
-            <td>✏️ 🗑️</td>
-        </tr>
-
-        <tr>
-            <td>Orange</td>
-            <td>Rabat</td>
-            <td>Maroc</td>
-            <td>✏️ 🗑️</td>
-        </tr>
-
-    </tbody>
-
-</table>
+    </form>
 
     <table>
 
@@ -102,14 +59,22 @@
                 <td>Total</td>
                 <td>Paris</td>
                 <td>France</td>
-                <td>✏️ 🗑️</td>
+                <td>
+                    <button class="btn-supprimer" onclick="supprimerSociete(this)">
+                        🗑️
+                    </button>
+                </td>
             </tr>
 
             <tr>
                 <td>Orange</td>
                 <td>Rabat</td>
                 <td>Maroc</td>
-                <td>✏️ 🗑️</td>
+                <td>
+                    <button class="btn-supprimer" onclick="supprimerSociete(this)">
+                        🗑️
+                    </button>
+                </td>
             </tr>
 
         </tbody>
@@ -121,4 +86,5 @@
 <script src="script.js"></script>
 
 </body>
+
 </html>
