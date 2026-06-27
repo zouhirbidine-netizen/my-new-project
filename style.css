@@ -226,3 +226,16 @@ tr:hover{
 .btn-supprimer:hover{
     opacity:0.8;
 }
+.btn-modifier{
+    background:#3498db;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:5px;
+    cursor:pointer;
+    margin-right:5px;
+}
+
+.btn-modifier:hover{
+    opacity:0.8;
+}

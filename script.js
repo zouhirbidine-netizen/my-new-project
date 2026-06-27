@@ -50,7 +50,11 @@ if (formulaire) {
                 <td>${nom}</td>
                 <td>${ville}</td>
                 <td>${pays}</td>
-                <td>
+               <td>
+    <button class="btn-modifier" onclick="modifierSociete(this)">
+        ✏️
+    </button>
+
     <button class="btn-supprimer" onclick="supprimerSociete(this)">
         🗑️
     </button>
@@ -76,6 +80,29 @@ function supprimerSociete(bouton) {
         const ligne = bouton.parentElement.parentElement;
 
         ligne.remove();
+
+    }
+
+}
+// =========================
+// MODIFIER UNE SOCIÉTÉ
+// =========================
+
+function modifierSociete(bouton) {
+
+    const ligne = bouton.parentElement.parentElement;
+
+    const cellules = ligne.getElementsByTagName("td");
+
+    const nouveauNom = prompt("Nom :", cellules[0].textContent);
+    const nouvelleVille = prompt("Ville :", cellules[1].textContent);
+    const nouveauPays = prompt("Pays :", cellules[2].textContent);
+
+    if (nouveauNom && nouvelleVille && nouveauPays) {
+
+        cellules[0].textContent = nouveauNom;
+        cellules[1].textContent = nouvelleVille;
+        cellules[2].textContent = nouveauPays;
 
     }
 
