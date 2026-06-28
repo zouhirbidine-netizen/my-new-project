@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComptaConnect - Factures</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">
+        <img src="images/logo.png" alt="Logo">
+        <h1>ComptaConnect</h1>
+    </div>
+
+    <button class="btn-deconnexion">Déconnexion</button>
+</header>
+
+<main>
+
+    <h2>📄 Gestion des factures</h2>
+    <div class="stats-factures">
+
+    <div class="stat-card">
+        <h3>Toutes</h3>
+        <p id="nbTotal">0</p>
+    </div>
+
+    <div class="stat-card payee">
+        <h3>🟢 Payées</h3>
+        <p id="nbPayees">0</p>
+    </div>
+
+    <div class="stat-card attente">
+        <h3>🟡 En attente</h3>
+        <p id="nbAttente">0</p>
+    </div>
+
+    <div class="stat-card nonpayee">
+        <h3>🔴 Non payées</h3>
+        <p id="nbNonPayees">0</p>
+    </div>
+
+    <div class="stat-card litige">
+        <h3>⚠️ Litiges</h3>
+        <p id="nbLitiges">0</p>
+    </div>
+
+</div>
+<div class="zone-filtre">
+
+<h3>🔍 Recherche</h3>
+
+<div class="ligne-filtre">
+
+<input
+type="text"
+id="rechercheNumero"
+placeholder="N° facture">
+
+<input
+type="text"
+id="rechercheFournisseur"
+placeholder="Fournisseur">
+
+<input
+type="text"
+id="rechercheSociete"
+placeholder="Société">
+
+<select id="filtreStatut">
+
+<option value="">Tous les statuts</option>
+
+<option>Payée</option>
+
+<option>En attente</option>
+
+<option>Non payée</option>
+
+</select>
+
+<select id="filtreLitige">
+
+<option value="">Tous les litiges</option>
+
+<option>Aucun</option>
+
+<option>Ouvert</option>
+
+<option>Résolu</option>
+
+</select>
+
+<button id="btnRecherche">
+Appliquer
+</button>
+
+</div>
+
+</div>
+
+    <form id="formFacture" class="formulaire">
+
+        <input type="text" id="numeroFacture" placeholder="N° Facture" required>
+
+        <input type="text" id="fournisseur" placeholder="Fournisseur" required>
+
+        <input type="text" id="societe" placeholder="Société" required>
+
+        <label>Date de facture</label>
+        <input type="date" id="dateFacture" required>
+
+        <label>Date d'échéance</label>
+        <input type="date" id="dateEcheance" required>
+
+        <input type="number" id="montantHT" placeholder="Montant HT" step="0.01" required>
+
+        <input type="number" id="tva" placeholder="TVA (%)" value="20" required>
+
+        <input type="number" id="montantTTC" placeholder="Montant TTC" readonly>
+
+        <select id="devise">
+            <option value="MAD">MAD</option>
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+        </select>
+
+        <input type="text" id="iban" placeholder="IBAN">
+
+        <input type="text" id="siren" placeholder="SIREN">
+
+        <input type="text" id="siret" placeholder="SIRET">
+
+        <select id="statut">
+            <option value="En attente">🟡 En attente</option>
+            <option value="Payée">🟢 Payée</option>
+            <option value="Non payée">🔴 Non payée</option>
+        </select>
+
+        <select id="litige">
+            <option value="Aucun">❌ Aucun</option>
+            <option value="Ouvert">🟠 Ouvert</option>
+            <option value="Résolu">🔵 Résolu</option>
+        </select>
+
+        <textarea id="commentaire" placeholder="Commentaire"></textarea>
+
+        <button type="submit">Ajouter la facture</button>
+
+    </form>
+
+    <hr>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>N°</th>
+                <th>Fournisseur</th>
+                <th>Société</th>
+                <th>Date</th>
+                <th>Montant TTC</th>
+                <th>Statut</th>
+                <th>Litige</th>
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="listeFactures">
+
+        </tbody>
+
+    </table>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

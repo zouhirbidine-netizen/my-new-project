@@ -160,3 +160,188 @@ document.addEventListener("DOMContentLoaded", () => {
     afficherSocietes();
 
 });
+// =========================
+// GESTION DES FACTURES
+// =========================
+
+const montantHT = document.getElementById("montantHT");
+const tva = document.getElementById("tva");
+const montantTTC = document.getElementById("montantTTC");
+
+function calculerTTC() {
+
+    if (!montantHT || !tva || !montantTTC) return;
+
+    const ht = parseFloat(montantHT.value) || 0;
+    const tauxTVA = parseFloat(tva.value) || 0;
+
+    const ttc = ht + (ht * tauxTVA / 100);
+
+    montantTTC.value = ttc.toFixed(2);
+}
+
+if (montantHT && tva) {
+    montantHT.addEventListener("input", calculerTTC);
+    tva.addEventListener("input", calculerTTC);
+}
+// =========================
+// LOCALSTORAGE FACTURES
+// =========================
+
+function getFactures() {
+    return JSON.parse(localStorage.getItem("factures")) || [];
+}
+
+function saveFactures(factures) {
+    localStorage.setItem("factures", JSON.stringify(factures));
+}
+// =========================
+// AFFICHAGE DES FACTURES
+// =========================
+
+const listeFactures = document.getElementById("listeFactures");
+
+function afficherFactures() {
+
+    if (!listeFactures) return;
+
+    const factures = getFactures();
+
+    listeFactures.innerHTML = "";
+
+    factures.forEach((facture, index) => {
+
+        listeFactures.innerHTML += `
+            <tr>
+                <td>${facture.numero}</td>
+                <td>${facture.fournisseur}</td>
+                <td>${facture.societe}</td>
+                <td>${facture.date}</td>
+                <td>${facture.ttc} ${facture.devise}</td>
+                <td>${facture.statut}</td>
+                <td>${facture.litige}</td>
+
+                <td>
+                    <button class="btn-modifier" onclick="modifierFacture(${index})">✏️</button>
+
+                    <button class="btn-supprimer" onclick="supprimerFacture(${index})">🗑️</button>
+                </td>
+            </tr>
+        `;
+    });
+
+}
+
+afficherFactures();
+// =========================
+// AJOUT FACTURE
+// =========================
+
+const formFacture = document.getElementById("formFacture");
+
+if (formFacture) {
+
+    formFacture.addEventListener("submit", function(e) {
+
+        e.preventDefault();
+
+        const facture = {
+
+            numero: document.getElementById("numeroFacture").value,
+
+            fournisseur: document.getElementById("fournisseur").value,
+
+            societe: document.getElementById("societe").value,
+
+            date: document.getElementById("dateFacture").value,
+
+            ttc: document.getElementById("montantTTC").value,
+
+            devise: document.getElementById("devise").value,
+
+            statut: document.getElementById("statut").value,
+
+            litige: document.getElementById("litige").value
+
+        };
+
+        const factures = getFactures();
+
+        factures.push(facture);
+
+        saveFactures(factures);
+
+        afficherFactures();
+
+        formFacture.reset();
+
+        montantTTC.value = "";
+
+    });
+
+}
+// =========================
+// SUPPRIMER FACTURE
+// =========================
+
+function supprimerFacture(index) {
+
+    if (!confirm("Voulez-vous supprimer cette facture ?")) return;
+
+    const factures = getFactures();
+
+    factures.splice(index, 1);
+
+    saveFactures(factures);
+
+    afficherFactures();
+}
+
+// =========================
+// MODIFIER FACTURE
+// =========================
+
+function modifierFacture(index) {
+
+    const factures = getFactures();
+
+    const facture = factures[index];
+
+    const numero = prompt("Numéro de facture :", facture.numero);
+    const fournisseur = prompt("Fournisseur :", facture.fournisseur);
+    const societe = prompt("Société :", facture.societe);
+    const date = prompt("Date :", facture.date);
+    const ttc = prompt("Montant TTC :", facture.ttc);
+    const devise = prompt("Devise :", facture.devise);
+    const statut = prompt("Statut :", facture.statut);
+    const litige = prompt("Litige :", facture.litige);
+
+    if (
+        numero &&
+        fournisseur &&
+        societe &&
+        date &&
+        ttc &&
+        devise &&
+        statut &&
+        litige
+    ) {
+
+        factures[index] = {
+            ...facture,
+            numero,
+            fournisseur,
+            societe,
+            date,
+            ttc,
+            devise,
+            statut,
+            litige
+        };
+
+        saveFactures(factures);
+
+        afficherFactures();
+    }
+
+}
