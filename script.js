@@ -3,11 +3,23 @@ document.addEventListener("DOMContentLoaded", () => {
     // =========================
     // PROTECTION DASHBOARD
     // =========================
-    if (window.location.pathname.includes("dashboard.html")) {
-        if (!sessionStorage.getItem("loggedIn")) {
-            window.location.href = "index.html";
-        }
+    // =========================
+// PROTECTION DES PAGES
+// =========================
+
+const page = window.location.pathname;
+
+if (
+    page.includes("dashboard.html") ||
+    page.includes("societes.html") ||
+    page.includes("factures.html") ||
+    page.includes("fournisseurs.html") ||
+    page.includes("litiges.html")
+) {
+    if (!sessionStorage.getItem("loggedIn")) {
+        window.location.href = "index.html";
     }
+}
 
     // =========================
     // CONNEXION
@@ -24,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (utilisateur === "admin" && motDePasse === "1234") {
                 sessionStorage.setItem("loggedIn", "true");
-                window.location.href = "dashboard.html";
+window.location.replace("dashboard.html");
             } else {
                 alert("Nom d'utilisateur ou mot de passe incorrect !");
             }
@@ -32,17 +44,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =========================
-    // DECONNEXION
-    // =========================
+// DECONNEXION
+// =========================
 
-    const btnDeconnexion = document.querySelector(".btn-deconnexion");
+document.addEventListener("click", function (event) {
 
-    if (btnDeconnexion) {
-        btnDeconnexion.addEventListener("click", function () {
-            sessionStorage.removeItem("loggedIn");
-            window.location.href = "index.html";
-        });
+    if (event.target.matches(".btn-deconnexion")) {
+
+        sessionStorage.clear();
+
+        window.location.replace("index.html");
     }
+
+});
 
     // =========================
     // LOCALSTORAGE
